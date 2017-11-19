@@ -1,0 +1,6 @@
+@import "base/variables"; // not underscore and file type are not here
+
+//foundation
+@import "base/foundation-settings";
+@import "foundation";
+@include foundation-everything;
