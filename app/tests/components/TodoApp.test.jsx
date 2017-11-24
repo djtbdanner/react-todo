@@ -10,5 +10,4 @@ describe('Todo App', () => {
   it('Should exist', () => {
     expect(TodoApp).toExist();
   });
-
 });
