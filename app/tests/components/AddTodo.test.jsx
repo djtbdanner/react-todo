@@ -13,12 +13,13 @@ describe('AddTodo', () => {
 
   it('Should call handle todo if valid todo is entered', () => {
     var spy = expect.createSpy();
+    var todoText = "this is a test todo";
     // injecting the spy into the method
     var controls = TestUtils.renderIntoDocument(<AddTodo handleTodoTextAdd={spy}/>);
     var $el = $(ReactDOM.findDOMNode(controls));
-    controls.refs.todoText.value = "this is a test todo";
+    controls.refs.todoText.value = todoText;
     TestUtils.Simulate.submit($el.find('form')[0]);
-    expect(spy).toHaveBeenCalledWith("this is a test todo");
+    expect(spy).toHaveBeenCalledWith(todoText);
   });
 
 
