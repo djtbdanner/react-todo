@@ -30,14 +30,14 @@ describe('Todo App', () => {
     var todoApp = TestUtils.renderIntoDocument(<TodoApp/>);
     todoApp.setState({todos: [todoData]});
     expect(todoApp.state.todos[0].completed).toBe(false);
-    expect(todoApp.state.todos[0].completedAt).toBe(undefined);
+    expect(todoApp.state.todos[0].completedAt).toNotExist();
     var now = moment().unix();
     todoApp.handleToggle(11);
     expect(todoApp.state.todos[0].completed).toBe(true);
     expect(todoApp.state.todos[0].completedAt).toBeGreaterThanOrEqualTo(now, "get the timestamp");
     todoApp.handleToggle(11);
     expect(todoApp.state.todos[0].completed).toBe(false);
-    expect(todoApp.state.todos[0].completedAt).toBe(undefined);
+    expect(todoApp.state.todos[0].completedAt).toNotExist();
   });
 
 });
