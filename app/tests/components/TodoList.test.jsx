@@ -40,4 +40,13 @@ describe('TodoList', () => {
     // expect(spans.length).toBe(4);
   });
 
+  it('Should render message if nothing to do', () => {
+    var todos = [];
+    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
+    var $el = $(ReactDOM.findDOMNode(todoList));
+    var paragraph = $el.find('p');
+    expect(paragraph.text()).toEqual("Nothing to do");
+    alert(paragraph.text());
+  });
+
 });

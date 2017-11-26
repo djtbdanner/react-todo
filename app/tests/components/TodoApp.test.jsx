@@ -30,14 +30,26 @@ describe('Todo App', () => {
     var todoApp = TestUtils.renderIntoDocument(<TodoApp/>);
     todoApp.setState({todos: [todoData]});
     expect(todoApp.state.todos[0].completed).toBe(false);
-    expect(todoApp.state.todos[0].completedAt).toNotExist();
+    expect(todoApp.state.todos[0].completedAt).toBe(undefined);
+    var now = moment().unix();
+    todoApp.handleToggle(11);
+    expect(todoApp.state.todos[0].completed).toBe(true);
+    expect(todoApp.state.todos[0].completedAt).toBeGreaterThanOrEqualTo(now, "get the timestamp");
+  });
+
+  it('Should toggle completed timestamp with toggle', () => {
+    var todoData = getATodoArray()
+    var todoApp = TestUtils.renderIntoDocument(<TodoApp/>);
+    todoApp.setState({todos: [todoData]});
+    expect(todoApp.state.todos[0].completed).toBe(false);
+    expect(todoApp.state.todos[0].completedAt).toBe(undefined);
     var now = moment().unix();
     todoApp.handleToggle(11);
     expect(todoApp.state.todos[0].completed).toBe(true);
     expect(todoApp.state.todos[0].completedAt).toBeGreaterThanOrEqualTo(now, "get the timestamp");
     todoApp.handleToggle(11);
     expect(todoApp.state.todos[0].completed).toBe(false);
-    expect(todoApp.state.todos[0].completedAt).toNotExist();
+    expect(todoApp.state.todos[0].completedAt).toBe(undefined);
   });
 
 });
