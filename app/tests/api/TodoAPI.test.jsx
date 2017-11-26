@@ -3,17 +3,19 @@ var TodoAPI = require('TodoAPI');
 
 
 describe('Todo API', () => {
-  // called before each
+  // called before each test
   beforeEach(()=>{
     //alert("clearing local storage");
     localStorage.removeItem('todos');
   });
 
   it('Should exist', () => {
+
     expect(TodoAPI).toExist();
   });
 
   describe('setTodos', () => {
+
     it ('Should set valid todos array', ()=>{
       var todos = getExampleTodoArray();
       TodoAPI.setTodos(todos);
@@ -28,38 +30,21 @@ describe('Todo API', () => {
       expect(localStorage.getItem('todos')).toBe(null);
     });
 
-    //var spy = expect.createSpy();
-    // var todoText = "this is a test todo";
-    // // injecting the spy into the method
-    // var controls = TestUtils.renderIntoDocument(<AddTodo handleTodoTextAdd={spy}/>);
-    // var $el = $(ReactDOM.findDOMNode(controls));
-    // controls.refs.todoText.value = todoText;
-    // TestUtils.Simulate.submit($el.find('form')[0]);
-    // expect(spy).toHaveBeenCalledWith(todoText);
   });
-  //
-  //
+
+
   describe('fetchTodos', () => {
 
     it ('Should return empty array for bad local storage data', ()=>{
       var emptyArray = [];
       expect(TodoAPI.fetchTodos()).toEqual(emptyArray);
-
     });
 
     it ('return todos if valid array in storage', ()=>{
       var todos = getExampleTodoArray();
       localStorage.setItem('todos', JSON.stringify(todos));
       expect(TodoAPI.fetchTodos()).toEqual(todos);
-
     });
-    // var spy = expect.createSpy();
-    // // injecting the spy into the method
-    // var controls = TestUtils.renderIntoDocument(<AddTodo handleTodoTextAdd={spy}/>);
-    // var $el = $(ReactDOM.findDOMNode(controls));
-    // controls.refs.todoText.value = "";
-    // TestUtils.Simulate.submit($el.find('form')[0]);
-    // expect(spy).toNotHaveBeenCalled();
   });
 
 });
