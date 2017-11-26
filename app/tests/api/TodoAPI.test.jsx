@@ -47,6 +47,45 @@ describe('Todo API', () => {
     });
   });
 
+  describe('filterTodos', () => {
+
+    it ('Should return all items if show completed is true', ()=>{
+      var todos = getExampleTodoArray();
+      var filteredTodos = TodoAPI.filterTodos(todos, true, '');
+      expect(filteredTodos.length).toEqual(4);
+    });
+
+    it ('Should filter items if completed and showCompleted is false', ()=>{
+      var todos = getExampleTodoArray();
+      var filteredTodos = TodoAPI.filterTodos(todos, false, '');
+      expect(filteredTodos.length).toEqual(2);
+    });
+
+    it ('Should sort completed to after not completed in array', ()=>{
+      var todos = getExampleTodoArray();
+      expect(todos[0].id).toEqual(1);
+      var filteredTodos = TodoAPI.filterTodos(todos, false, '');
+      expect(filteredTodos[0].id).toEqual(2);
+    });
+
+    it ('Should filter by string ', ()=>{
+      var todos = getExampleTodoArray();
+      expect(todos[0].id).toEqual(1);
+      var filteredTodos = TodoAPI.filterTodos(todos, true, 'store');
+      expect(filteredTodos[0].id).toEqual(4);
+      expect(filteredTodos.length).toEqual(1);
+    });
+
+    it ('Should return all when filter string is empty  ', ()=>{
+      var todos = getExampleTodoArray();
+      expect(todos[0].id).toEqual(1);
+      var filteredTodos = TodoAPI.filterTodos(todos, true, '');
+      expect(filteredTodos.length).toEqual(4);
+    });
+
+  });
+
+
 });
 
 function getExampleTodoArray(){
@@ -54,7 +93,7 @@ function getExampleTodoArray(){
     {
       id: 1,
       text: "Walk the dog.",
-      completed: false
+      completed: true
     }, {
       id: 2,
       text: "Clean the bathrooms.",

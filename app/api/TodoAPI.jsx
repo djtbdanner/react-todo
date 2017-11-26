@@ -2,44 +2,51 @@ var uuid = require('node-uuid');
 var $ = require('jQuery');
 
 module.exports = {
-  setTodos: function (todos){
-    if ($.isArray(todos)){
-      localStorage.setItem('todos', JSON.stringify(todos));// cannot set array on storage
+  setTodos: function(todos) {
+    if ($.isArray(todos)) {
+      localStorage.setItem('todos', JSON.stringify(todos)); // cannot set array on storage
       return todos;
     }
   },
 
-  fetchTodos: function(){
+  fetchTodos: function() {
     var stringTodos = localStorage.getItem('todos');
     var todos = [];
-    try{
+    try {
       todos = JSON.parse(stringTodos);
-    } catch (e){
+    } catch (e) {
       console.log("Unable to get todos from local storage..." + e);
     }
 
-    return $.isArray(todos)?todos:[];
+    return $.isArray(todos)
+      ? todos
+      : [];
+  },
 
+  filterTodos: function(todos, showCompleted, searchText) {
+    var filteredTodos = todos;
 
+    //Filter by showCompleted - filter is built in
+    filteredTodos = filteredTodos.filter((todo) => {
+      return !todo.completed || showCompleted;
+    });
 
-    // return [
-    //   {
-    //     id: uuid(),
-    //     text: "Walk the dog.",
-    //     completed: false
-    //   }, {
-    //     id: uuid(),
-    //     text: "Clean the bathrooms.",
-    //     completed: false
-    //   }, {
-    //     id: uuid(),
-    //     text: "Fix the thing that is broken.",
-    //     completed: false
-    //   }, {
-    //     id: uuid(),
-    //     text: "Go to store.",
-    //     completed: true
-    //   }
-    // ]
+    filteredTodos = filteredTodos.filter((todo) => {
+      return searchText.length === 0 || todo.text.indexOf(searchText) > -1;
+    });
+
+    // sort is built in (similar to Java sort)
+    filteredTodos.sort((a, b) => {
+      if (a.completed && !b.comleted) {
+        return 1;
+      }
+      if (!a.completed && b.completed) {
+        return -1;
+      }
+      return 0;
+
+    });
+
+    return filteredTodos;
   }
 };
