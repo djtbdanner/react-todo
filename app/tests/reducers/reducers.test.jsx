@@ -29,4 +29,51 @@ describe('Reducers', () => {
     });
   });
 
+  describe('todosReducer', () => {
+    it('should add todos', () => {
+      var action = {
+        type: 'ADD_TODO',
+        text: "Please do some stuff"
+      };
+
+      var res = reducers.todosReducer(df([]), df(action));
+      expect(res.length).toEqual(1);
+      expect(res[0].text).toEqual(action.text);
+    });
+
+    it('should toggle todo completed', () => {
+      var action = {
+        type: 'TOGGLE_TODO',
+        id: 11
+      };
+
+      var res = reducers.todosReducer(df(getATodoArray()), df(action));
+      expect(res.length).toEqual(2);
+      expect(res[0].completed).toEqual(true);
+      expect(res[0].completedAt).toExist();
+      expect(res[1].completed).toEqual(false);
+
+      res = reducers.todosReducer(df(res), df(action));
+      expect(res[0].completed).toEqual(false);
+      expect(res[0].completedAt).toNotExist();
+    });
+  });
 });
+
+function getATodoArray() {
+  return [
+    {
+      id: 11,
+      text: "Do stuff",
+      completed: false,
+      createdAt: 0,
+      completedAt: undefined
+    }, {
+      id: 12,
+      text: "Do other stuff and have fun",
+      completed: false,
+      createdAt: 0,
+      completedAt: undefined
+    }
+  ];
+}
