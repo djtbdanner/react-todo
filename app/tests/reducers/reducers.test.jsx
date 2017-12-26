@@ -58,6 +58,21 @@ describe('Reducers', () => {
       expect(res[0].completedAt).toNotExist();
     });
   });
+
+  it('should gemerate add todos action object', () => {
+    var todoArray = getATodoArray();
+    var action = {
+      type: 'ADD_TODOS',
+      todos: todoArray
+    };
+
+    var res = reducers.todosReducer(df([]), df(action));
+    expect(res.length).toEqual(2);
+    expect(res[0].text).toEqual("Do stuff");
+    expect(res[1].text).toEqual("Do other stuff and have fun");
+
+  });
+
 });
 
 function getATodoArray() {
