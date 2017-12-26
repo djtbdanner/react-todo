@@ -2,7 +2,7 @@ var React = require('react');
 var uuid = require('node-uuid');
 var moment = require('moment');
 
-var TodoSearch = require('TodoSearch');
+import TodoSearch from 'TodoSearch';
 var TodoAPI = require('TodoAPI');
 
 import TodoList from "TodoList";
@@ -34,20 +34,20 @@ var TodoApp = React.createClass({
     this.setState({todos:updatedTodos});
   },
 
-  handleAddTodo: function(text){
-    this.setState({
-      todos:[
-        ...this.state.todos,
-        {
-          id: uuid() ,
-          text:text,
-          completed: false,
-          createdAt: moment().unix(),
-          completedAt: undefined
-        }
-      ]
-    });
-  },
+  // handleAddTodo: function(text){
+  //   this.setState({
+  //     todos:[
+  //       ...this.state.todos,
+  //       {
+  //         id: uuid() ,
+  //         text:text,
+  //         completed: false,
+  //         createdAt: moment().unix(),
+  //         completedAt: undefined
+  //       }
+  //     ]
+  //   });
+  // },
 
   handleSearch: function(showCompleted, searchText){
     this.setState({

@@ -11,10 +11,6 @@ store.subscribe(() => {
   console.log("New State", store.getState());
 });
 
-store.dispatch(action.addTodo("Clean the yard"));
-store.dispatch(action.setSearchText("yard"));
-store.dispatch(action.toggleShowCompleted());
-
 $(document).foundation();
 
 // application styles

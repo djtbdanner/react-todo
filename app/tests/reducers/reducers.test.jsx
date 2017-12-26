@@ -17,7 +17,7 @@ describe('Reducers', () => {
   });
 
   describe('showCompletedReducer', () => {
-    it('should toggle showComleted', () => {
+    it('should toggle showCompleted', () => {
       var action = {
         type: 'TOGGLE_SHOW_COMPLETED'
       };
