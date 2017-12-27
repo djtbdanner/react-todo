@@ -30,15 +30,20 @@ describe('Reducers', () => {
   });
 
   describe('todosReducer', () => {
-    it('should add todos', () => {
+    it('should add new todo', () => {
       var action = {
         type: 'ADD_TODO',
-        text: "Please do some stuff"
+        todo:{
+          id: '123',
+          text: "Please do some stuff",
+          completed: false,
+          createdAt: 98798778
+        }
       };
 
       var res = reducers.todosReducer(df([]), df(action));
       expect(res.length).toEqual(1);
-      expect(res[0].text).toEqual(action.text);
+      expect(res[0]).toEqual(action.todo);
     });
 
     it('should toggle todo completed', () => {
@@ -59,7 +64,7 @@ describe('Reducers', () => {
     });
   });
 
-  it('should gemerate add todos action object', () => {
+  it('should generate add todos action object', () => {
     var todoArray = getATodoArray();
     var action = {
       type: 'ADD_TODOS',

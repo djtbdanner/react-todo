@@ -27,16 +27,59 @@ firebaseRef.set({
 //   console.log('Set Failed!');
 // })
 
-/// challenge us .on to listen for changes in user object. The update user name to a differnt name, then update apps name see
- firebaseRef.child('app').on('value', (snapshot) => {
-   console.log('Data changed', snapshot.val());
- });
 
-console.log('updating app name');
-firebaseRef.update({'app/name': 'Todo Application'});
+// challenge: Create a new variable reference todos array. Use child added so that when new added, then add two new todos. Make sure see call back
+var todosRef = firebaseRef.child('todos');
+todosRef.on('child_added', (snapshot) => {
+  console.log('New Todo Added', snapshot.key, snapshot.val());
+});
 
-console.log('updating user name');
-firebaseRef.update({'user/name': 'Some User'});
+todosRef.push({
+  text:"Walk the dog.",
+  completed: false
+});
+
+todosRef.push({
+  text:"Eat the cake.",
+  completed: false
+});
+
+
+/// add array type data
+// var notesRef = firebaseRef.child('notes');
+// notesRef.on('child_added', (snapshot) => {
+//   console.log('Child Added', snapshot.key, snapshot.val());
+// });
+// notesRef.on('child_changed', (snapshot) => {
+//   console.log('Child changed', snapshot.key, snapshot.val());
+// });
+// notesRef.on('child_removed', (snapshot) => {
+//   console.log('Child Removed', snapshot.key, snapshot.val());
+// });
+//
+// // var newNotesRef = notesRef.push();
+// // newNotesRef.set({
+// //   text:"Walk the dog."
+// // });
+// // shortcut for above
+// var newNotesRef = notesRef.push({
+//   text:"Walk the dog."
+// });
+// console.log("Todo id", newNotesRef.key);
+//
+
+
+
+// /// challenge us .on to listen for changes in user object. The update user name to a differnt name, then update apps name see
+//  firebaseRef.child('app').on('value', (snapshot) => {
+//    console.log('Data changed', snapshot.val());
+//  });
+//
+// console.log('updating app name');
+// firebaseRef.update({'app/name': 'Todo Application'});
+//
+// console.log('updating user name');
+// firebaseRef.update({'user/name': 'Some User'});
 
 // fetch data
 // firebaseRef.child('app').once('value').then((snapshot) => {

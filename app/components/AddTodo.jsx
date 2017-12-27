@@ -12,7 +12,7 @@ export var AddTodo = React.createClass({
     if (todoText.length > 0){
       this.refs.todoText.value = "";
       //this.props.handleTodoTextAdd(todoText);
-      dispatch(actions.addTodo(todoText));
+      dispatch(actions.startAddTodo(todoText));
     } else {
       //alert("Not doing anything 'cause nothing is entered");
       this.refs.todoText.focus();

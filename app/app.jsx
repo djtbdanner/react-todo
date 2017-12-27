@@ -8,7 +8,8 @@ var action = require('actions');
 var store = require('configureStore').configure();
 var TodoAPI = require('TodoAPI');
 
-import './../playground/firebase/index'
+// this will allow the playground to work
+//import './../playground/firebase/index'
 
 store.subscribe(() => {
   var state = store.getState();
