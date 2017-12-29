@@ -52,17 +52,18 @@ export var startToggleTodo = (id, completed) => {
 
 export var startAddTodos = () => {
   return(dispatch, getState) => {
-    firebaseRef.child('todos').once('value').then((snapshot) => {
-      var keys = Object.keys(snapshot.val());
-      var todos = [];
-      for (var key in keys) {
-        var id = keys[key];
-        todos.push({
-          id,
-          ...snapshot.val()[id]
+    var todosRef = firebaseRef.child('todos');
+    return todosRef.once('value').then((snapshot) => {
+      var todos = snapshot.val() || {};
+      var keys = Object.keys(todos);
+      var parsedTodos = [];
+      keys.forEach((todoId) => {
+        parsedTodos.push({
+          id: todoId,
+          ...todos[todoId]
         });
-      }
-      return (dispatch(addTodos(todos)));
+      });
+      return (dispatch(addTodos(parsedTodos)));
     }, (e) => {
       console.log('unable to fetch value!', e);
     });
