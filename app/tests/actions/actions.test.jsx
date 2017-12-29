@@ -119,12 +119,4 @@ describe('Actions', () => {
       done();
     });
   });
-  //////
-  // store.dispatch(actions.startAddTodo(todoText)).then(() => {
-  //   const actions = store.getActions();  will return all actions on mock store
-  //   expect(actions[0]).toInclude({type: 'ADD_TODO'});
-  //   expect(actions[0].todo).toInclude({text: todoText});
-  //
-  // }).catch(done);
-  //////
 });
