@@ -4,21 +4,23 @@ var {Route, Router, IndexRoute, hashHistory} = require ('react-router');
 var {Provider} = require('react-redux');
 var TodoApp = require('TodoApp');
 
-var action = require('actions');
+var actions = require('actions');
 var store = require('configureStore').configure();
 var TodoAPI = require('TodoAPI');
 
 // this will allow the playground to work
 //import './../playground/firebase/index'
 
-store.subscribe(() => {
-  var state = store.getState();
-  console.log("New State",state);
-  TodoAPI.setTodos(state.todos);
-});
+// store.subscribe(() => {
+//   var state = store.getState();
+//   console.log("New State",state);
+//   TodoAPI.setTodos(state.todos);
+// });
 
-var initialTodos = TodoAPI.fetchTodos();
-store.dispatch(action.addTodos(initialTodos));
+// var initialTodos = TodoAPI.fetchTodos();
+// store.dispatch(action.addTodos(initialTodos));
+
+store.dispatch(actions.startAddTodos());
 
 $(document).foundation();
 

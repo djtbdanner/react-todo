@@ -2,26 +2,26 @@ var uuid = require('node-uuid');
 var $ = require('jQuery');
 
 module.exports = {
-  setTodos: function(todos) {
-    if ($.isArray(todos)) {
-      localStorage.setItem('todos', JSON.stringify(todos)); // cannot set array on storage
-      return todos;
-    }
-  },
+  // setTodos: function(todos) {
+  //   if ($.isArray(todos)) {
+  //     localStorage.setItem('todos', JSON.stringify(todos)); // cannot set array on storage
+  //     return todos;
+  //   }
+  // },
 
-  fetchTodos: function() {
-    var stringTodos = localStorage.getItem('todos');
-    var todos = [];
-    try {
-      todos = JSON.parse(stringTodos);
-    } catch (e) {
-      console.log("Unable to get todos from local storage..." + e);
-    }
-
-    return $.isArray(todos)
-      ? todos
-      : [];
-  },
+  // fetchTodos: function() {
+  //   var stringTodos = localStorage.getItem('todos');
+  //   var todos = [];
+  //   try {
+  //     todos = JSON.parse(stringTodos);
+  //   } catch (e) {
+  //     console.log("Unable to get todos from local storage..." + e);
+  //   }
+  //
+  //   return $.isArray(todos)
+  //     ? todos
+  //     : [];
+  // },
 
   filterTodos: function(todos, showCompleted, searchText) {
     var filteredTodos = todos;
