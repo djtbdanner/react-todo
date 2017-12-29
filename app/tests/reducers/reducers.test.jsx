@@ -46,19 +46,29 @@ describe('Reducers', () => {
       expect(res[0]).toEqual(action.todo);
     });
 
-    it('should toggle todo completed', () => {
-      var action = {
-        type: 'TOGGLE_TODO',
-        id: 11
-      };
+    it('should update todo completed flag and time', () => {
+      var todos = getATodoArray()
+      var updates = {completed: true, completedAt: 654987}
 
-      var res = reducers.todosReducer(df(getATodoArray()), df(action));
+      var action = {
+        type: 'UPDATE_TODO',
+        id: todos[0].id,
+        updates
+      };
+      var res = reducers.todosReducer(df(todos), df(action));
       expect(res.length).toEqual(2);
       expect(res[0].completed).toEqual(true);
       expect(res[0].completedAt).toExist();
+      expect(res[0].text).toEqual(todos[0].text);
       expect(res[1].completed).toEqual(false);
 
-      res = reducers.todosReducer(df(res), df(action));
+      var updates = {completed: false, completedAt: null}
+      var action = {
+        type: 'UPDATE_TODO',
+        id: todos[0].id,
+        updates
+      };
+      res = reducers.todosReducer(df(todos), df(action));
       expect(res[0].completed).toEqual(false);
       expect(res[0].completedAt).toNotExist();
     });
@@ -75,9 +85,7 @@ describe('Reducers', () => {
     expect(res.length).toEqual(2);
     expect(res[0].text).toEqual("Do stuff");
     expect(res[1].text).toEqual("Do other stuff and have fun");
-
   });
-
 });
 
 function getATodoArray() {

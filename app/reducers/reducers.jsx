@@ -26,7 +26,7 @@ export var todosReducer = (state = [], action) => {
         ...state,
         action.todo
       ];
-    case 'TOGGLE_TODO':
+    case 'UPDATE_TODO':
       // var updatedTodos = state.map((todoOrig) => {
       //   if (todoOrig.id === action.id) {
       //     var todo = Object.assign({}, todoOrig);// cannot change object passed in
@@ -40,15 +40,10 @@ export var todosReducer = (state = [], action) => {
       return state.map((todo) => {
         var nextCompleted = todo.completed;
         if (todo.id === action.id) {
-          nextCompleted = !todo.completed;
-
           return {
             ...todo,
-            completed: nextCompleted,
-            completedAt: nextCompleted
-              ? moment().unix()
-              : undefined
-          };
+            ...action.updates
+          }
         } else {
           return todo;
         }
