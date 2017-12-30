@@ -10,7 +10,6 @@ app.use(function(req, res, next) {
     res.redirect('http://' + req.hostname + req.url);
 
   } else {
-  //  console.log(' navigating to http://' + req.hostname + req.url);
     next();
   }
 });
