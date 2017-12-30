@@ -1,5 +1,5 @@
 var uuid = require('node-uuid');
-var $ = require('jQuery');
+var $ = require('jquery');
 
 module.exports = {
   // setTodos: function(todos) {

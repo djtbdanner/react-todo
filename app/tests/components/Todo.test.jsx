@@ -1,7 +1,7 @@
 var expect = require('expect');
 var React = require('react');
 var ReactDOM = require('react-dom');
-var $ = require('jQuery');
+var $ = require('jquery');
 var TestUtils = require('react-addons-test-utils');
 
 import * as actions from 'actions';
