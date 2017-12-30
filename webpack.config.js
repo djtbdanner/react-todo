@@ -61,6 +61,5 @@ module.exports = {
       path.resolve(__dirname, './node_modules/foundation-sites/scss')
     ]
   },
-  // this will remove source map on production
   devtool: process.env.NODE_ENV === 'production'?undefined:'cheap-module-eval-source-map'
 };
