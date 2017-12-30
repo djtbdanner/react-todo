@@ -11,7 +11,8 @@
   "author": "Dave Danner",
   "license": "MIT",
   "engines": {
-    "node": "6.9.1"
+    "node": "6.9.1",
+    "npm" : "3.10.8"
   },
   "dependencies": {
     "axios": "^0.9.1",
