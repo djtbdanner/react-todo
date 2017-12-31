@@ -5,9 +5,9 @@ var {
 import Todo from 'Todo';
 var TodoAPI = require('TodoAPI');
 
-export var TodoList = React.createClass({
+export class TodoList extends React.Component{
 
-  render: function() {
+  render() {
     var {
       todos,
       showCompleted,
@@ -31,7 +31,7 @@ export var TodoList = React.createClass({
       {renderTodos()}
     </div>);
   }
-});
+};
 
 export default connect((state) => {
   return state;

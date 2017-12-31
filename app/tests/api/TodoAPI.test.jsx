@@ -76,6 +76,14 @@ describe('Todo API', () => {
       expect(filteredTodos.length).toEqual(1);
     });
 
+    it ('Should filter by string ignore case ', ()=>{
+      var todos = getExampleTodoArray();
+      expect(todos[0].id).toEqual(1);
+      var filteredTodos = TodoAPI.filterTodos(todos, true, 'STORE');
+      expect(filteredTodos[0].id).toEqual(4);
+      expect(filteredTodos.length).toEqual(1);
+    });
+
     it ('Should return all when filter string is empty  ', ()=>{
       var todos = getExampleTodoArray();
       expect(todos[0].id).toEqual(1);

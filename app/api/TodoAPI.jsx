@@ -32,7 +32,7 @@ module.exports = {
     });
 
     filteredTodos = filteredTodos.filter((todo) => {
-      return searchText.length === 0 || todo.text.indexOf(searchText) > -1;
+      return searchText.length === 0 || todo.text.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
     });
 
     // sort is built in (similar to Java sort)
