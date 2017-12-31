@@ -65,6 +65,8 @@ export var todosReducer = (state = [], action) => {
         ...state,
         ...action.todos
       ];
+   case 'LOGOUT':
+        return [];
     default:
       return state;
   };

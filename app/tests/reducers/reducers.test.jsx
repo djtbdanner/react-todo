@@ -78,6 +78,26 @@ describe('Reducers', () => {
       expect(res[0].completed).toEqual(false);
       expect(res[0].completedAt).toNotExist();
     });
+
+    it('should clear todos on logout', () => {
+      var action = {
+        type: 'ADD_TODO',
+        todo: {
+          id: '123',
+          text: "Please do some stuff",
+          completed: false,
+          createdAt: 98798778
+        }
+      };
+
+      var res = reducers.todosReducer(df([]), df(action));
+      expect(res.length).toEqual(1);
+      expect(res[0]).toEqual(action.todo);
+
+      var action = {type: 'LOGOUT'};
+      var res = reducers.todosReducer(df([]), df(action));
+      expect(res.length).toEqual(0);
+    });
   });
 
   it('should generate add todos action object', () => {
