@@ -6,6 +6,8 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 // env file will throw error if no file there - like production
 try {
+  console.log();
+  console.log(new Date());
   console.log("reading " + __dirname + "/config/" + process.env.NODE_ENV+'.env' );
   envFile(path.join(__dirname, 'config/' + process.env.NODE_ENV+'.env'));
 } catch (e) {

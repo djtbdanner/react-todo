@@ -1,0 +1,10 @@
+.callout-auth{
+  background-color:$light-grey !important;
+  border: 1px solid $light-grey-border !important;
+  padding: 2rem !important;
+  text-align: center !important;
+
+  h3, p {
+    margin-bottom: 2rem;
+  }
+}

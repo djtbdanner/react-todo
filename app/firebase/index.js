@@ -22,6 +22,7 @@ try { // the connection stuff is available at the firebase script-loader
 // console.log("STORAGE_BUCKET")
 // console.log(process.env.STORAGE_BUCKET);
 
-
+// use github sometimes
+export var gitHubProvider = new firebase.auth.GithubAuthProvider();
 export var firebaseRef = firebase.database().ref();
 export default firebase;
