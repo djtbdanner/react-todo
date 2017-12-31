@@ -1,7 +1,16 @@
 var webpack =require('webpack');
 var path = require('path');
+var envFile = require('node-env-file');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+// env file will throw error if no file there - like production
+try {
+  console.log("reading " + __dirname + "/config/" + process.env.NODE_ENV+'.env' );
+  envFile(path.join(__dirname, 'config/' + process.env.NODE_ENV+'.env'));
+} catch (e) {
+  console.log('Error trying to get the env file in webpack.js ENV is [' + process.env.NODE_ENV + '] Error: ' + e );
+}
 
 module.exports = {
   entry: [
@@ -20,6 +29,17 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: false
+      }
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        API_KEY: JSON.stringify(process.env.API_KEY),
+        AUTH_DOMAIN: JSON.stringify(process.env.AUTH_DOMAIN),
+        DATABASE_URL: JSON.stringify(process.env.DATABASE_URL),
+        STORAGE_BUCKET: JSON.stringify(process.env.STORAGE_BUCKET),
+        PROJECT_ID: JSON.stringify(process.env.PROJECT_ID),
+        MESSAGING_SENDER_ID: JSON.stringify(process.env.MESSAGING_SENDER_ID)
       }
     })
   ],

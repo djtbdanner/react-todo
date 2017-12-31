@@ -1,15 +1,27 @@
 import firebase from 'firebase';
 try { // the connection stuff is available at the firebase script-loader
   var config = {
-    apiKey: "AIzaSyBTT7DN15z1BZN8GSYiYwqOJzqNt92RjfI",
-    authDomain: "todo-app-eadf9.firebaseapp.com",
-    databaseURL: "https://todo-app-eadf9.firebaseio.com",
-    projectId: "todo-app-eadf9",
-    storageBucket: "todo-app-eadf9.appspot.com",
-    messagingSenderId: "802353251300"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID
   };
   firebase.initializeApp(config);
 } catch (e) {}
+
+// console.log("API_KEY")
+// console.log(process.env.API_KEY);
+// console.log("AUTH_DOMAIN")
+// console.log(process.env.AUTH_DOMAIN);
+// console.log("DATABASE_URL")
+// console.log(process.env.DATABASE_URL);
+// console.log("PROJECT_ID")
+// console.log(process.env.PROJECT_ID);
+// console.log("STORAGE_BUCKET")
+// console.log(process.env.STORAGE_BUCKET);
+
 
 export var firebaseRef = firebase.database().ref();
 export default firebase;
