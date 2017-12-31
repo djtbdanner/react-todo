@@ -52,21 +52,6 @@ describe('Actions', () => {
     expect(res).toEqual(action);
   });
 
-  // testing asynch action - this is a mock!!! add redux mock store
-  // it is asynchronous too
-  it('should create todo and dispatch ADD_TODO', (done) => {
-    const store = createMockStore({});
-    const todoText = "My todo item";
-
-    store.dispatch(actions.startAddTodo(todoText)).then(() => {
-      const actions = store.getActions(); // will return all actions on mock store
-      expect(actions[0]).toInclude({type: 'ADD_TODO'});
-      expect(actions[0].todo).toInclude({text: todoText});
-
-    }).catch(done);
-    done();
-  });
-
   it('should generate toggle show completed action', () => {
     var action = {
       type: 'TOGGLE_SHOW_COMPLETED'
@@ -111,21 +96,27 @@ describe('Actions', () => {
 
   describe('Tests with firebase todos', () => {
     var testTodoRef;
+    var uid;
+    var todosRef;
 
     beforeEach((done) => {
-      var todosRef = firebaseRef.child('todos');
-      todosRef.remove().then(() => {
-        testTodoRef = firebaseRef.child('todos').push();
-        return testTodoRef.set({text: 'Something to do', completed: false, createdAt: 54654687988})
+        firebase.auth().signInAnonymously().then((user) => {
+        uid = user.uid;
+        todosRef = firebaseRef.child(`users/${uid}/todos`);
+        return todosRef.remove();
+      }).then(() => {
+        testTodoRef = todosRef.push();
+        return testTodoRef.set({text: 'Something to do', completed: false, createdAt: 54654687988});
       }).then(() => done()).catch(done);
+
     });
 
     afterEach((done) => {
-      testTodoRef.remove().then(() => done());
+      todosRef.remove().then(() => done());
     });
 
     it("Should toggle todo and dispatch UPDATE_TODO action ", (done) => {
-      const store = createMockStore({});
+      const store = createMockStore({auth:{uid}});
       const action = actions.startToggleTodo(testTodoRef.key, true);
       store.dispatch(action).then(() => {
         const mockActions = store.getActions();
@@ -139,13 +130,28 @@ describe('Actions', () => {
     });
 
     it("Should populate todos and dispatch ADD_TODOs!", (done) => {
-      const store = createMockStore({});
+      const store = createMockStore({auth:{uid}});
       const action = actions.startAddTodos();
       store.dispatch(action).then(() => {
         const mockActions = store.getActions();
         expect(mockActions[0]).toInclude({type: "ADD_TODO", text: 'Something to do', completed: false, createdAt: 54654687988});
         expect(mockActions[0].todos.length).toEqual(1);
       }, done);
+      done();
+    });
+
+    // testing asynch action - this is a mock!!! add redux mock store
+    // it is asynchronous too
+    it('should create todo and dispatch ADD_TODO', (done) => {
+      const store = createMockStore({auth:{uid}});
+      const todoText = "My todo item";
+
+      store.dispatch(actions.startAddTodo(todoText)).then(() => {
+        const actions = store.getActions(); // will return all actions on mock store
+        expect(actions[0]).toInclude({type: 'ADD_TODO'});
+        expect(actions[0].todo).toInclude({text: todoText});
+
+      }).catch(done);
       done();
     });
 
