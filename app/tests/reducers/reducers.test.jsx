@@ -33,7 +33,7 @@ describe('Reducers', () => {
     it('should add new todo', () => {
       var action = {
         type: 'ADD_TODO',
-        todo:{
+        todo: {
           id: '123',
           text: "Please do some stuff",
           completed: false,
@@ -48,7 +48,10 @@ describe('Reducers', () => {
 
     it('should update todo completed flag and time', () => {
       var todos = getATodoArray()
-      var updates = {completed: true, completedAt: 654987}
+      var updates = {
+        completed: true,
+        completedAt: 654987
+      }
 
       var action = {
         type: 'UPDATE_TODO',
@@ -62,7 +65,10 @@ describe('Reducers', () => {
       expect(res[0].text).toEqual(todos[0].text);
       expect(res[1].completed).toEqual(false);
 
-      var updates = {completed: false, completedAt: null}
+      var updates = {
+        completed: false,
+        completedAt: null
+      }
       var action = {
         type: 'UPDATE_TODO',
         id: todos[0].id,
@@ -85,6 +91,28 @@ describe('Reducers', () => {
     expect(res.length).toEqual(2);
     expect(res[0].text).toEqual("Do stuff");
     expect(res[1].text).toEqual("Do other stuff and have fun");
+  });
+
+});
+
+describe("Auth reducers", () => {
+  it('should store uid on  login', () => {
+    var uid = "BFR549";
+    const action = {
+      type: 'LOGIN',
+      uid
+    };
+    var res = reducers.authReducer(undefined, df(action));
+    expect(res).toEqual({uid: action.uid});
+  });
+
+  it('should wipe auth on log out', () => {
+    const authData = {uid: "BFR549"};
+    var action = {
+      type: 'LOGOUT'
+    };
+    var res = reducers.authReducer(df(authData), df(action));
+    expect(res).toEqual({});
   });
 });
 

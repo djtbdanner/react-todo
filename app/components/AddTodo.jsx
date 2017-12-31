@@ -8,7 +8,6 @@ export var AddTodo = React.createClass({
     e.preventDefault();
     var {dispatch} = this.props;
     var todoText = this.refs.todoText.value;
-
     if (todoText.length > 0){
       this.refs.todoText.value = "";
       //this.props.handleTodoTextAdd(todoText);
@@ -32,5 +31,4 @@ export var AddTodo = React.createClass({
   }
 });
 
-//module.exports = AddTodo;
 export default connect()(AddTodo);

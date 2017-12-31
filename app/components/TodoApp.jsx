@@ -10,12 +10,12 @@ export var TodoApp = React.createClass({
   onLogout(e) {
     e.preventDefault();
     var {dispatch} = this.props;
-
     dispatch(actions.startLogout());
 
   },
 
  render() {
+
     return (
       <div>
         <div className="page-actions">

@@ -76,6 +76,24 @@ describe('Actions', () => {
     expect(res).toEqual(action);
   });
 
+  it('should generate LOGIN action object', () => {
+    var uid = "BFR549";
+    var action = {
+      type: 'LOGIN',
+      uid
+    };
+    var res = actions.login(uid);
+    expect(res).toEqual(action);
+  });
+
+  it('should generate LOGOUT action object', () => {
+    var action = {
+      type: 'LOGOUT'
+    };
+    var res = actions.logout();
+    expect(res).toEqual(action);
+  });
+
   it('should generate update todo action', () => {
     var updates = {
       completed: false
@@ -99,9 +117,7 @@ describe('Actions', () => {
       todosRef.remove().then(() => {
         testTodoRef = firebaseRef.child('todos').push();
         return testTodoRef.set({text: 'Something to do', completed: false, createdAt: 54654687988})
-      })
-      .then(() => done())
-      .catch(done);
+      }).then(() => done()).catch(done);
     });
 
     afterEach((done) => {
@@ -132,7 +148,6 @@ describe('Actions', () => {
       }, done);
       done();
     });
-
 
   });
 });
